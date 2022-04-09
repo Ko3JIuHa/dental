@@ -678,18 +678,15 @@ $(window).on("load", function (e) {
    if (!$("html").hasClass("touch")) {
       $(".num-section").parallax("50%", -0.07);
    }
-   if ($("footer")) {
-      fetch("/footer.html")
-         .then((response) => {
-            return response.text();
-         })
-         .then((data) => {
-            document.querySelector("footer").innerHTML = data;
-            const date = new Date();
-            document.getElementById(
-               "footerCopyright"
-            ).innerText = `© 2000 - ${date.getFullYear()} Стоматология Дентал Медикал Центр`;
-            checkCookies();
-         });
-   }
+
+   $("header").load("/inc/header.html", function (response, status, xhr) {})
+   $("#mobmenu-paste").load("/inc/mobmenu.html", function (response, status, xhr) {})
+
+   $("footer").load("/inc/footer.html", function (response, status, xhr) {
+      const date = new Date();
+      document.getElementById(
+         "footerCopyright"
+      ).innerText = `© 2000 - ${date.getFullYear()} Стоматология Дентал Медикал Центр`;
+      checkCookies();
+   })
 });
